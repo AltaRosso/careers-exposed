@@ -1,0 +1,35 @@
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px;
+
+  h1 {
+    font-weight: 900;
+  }
+
+  input {
+    width: 360px;
+  }
+  
+  textarea {
+    width: 360px;
+  }
+
+  #send-msg-btn {
+    text-decoration: none;
+    color: #fff;
+    background-color: #ed1c25;
+    width: 150px;
+    padding: 10px;
+    border-radius: 22px;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .icons-container a:hover {
+    transform: translateY(-2px);
+  }
+
+}

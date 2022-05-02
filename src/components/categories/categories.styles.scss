@@ -1,0 +1,50 @@
+.categories-container {
+  display: grid;
+  gap: 30px;
+  padding: 50px;
+
+  
+
+  .col:hover {
+    cursor: pointer;
+    transform: translateY(-2px)
+  }
+
+  
+
+  .radio-category {
+    background-color: #044eba;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .publishing-category {
+    background-color: #b72ac4;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .scm-category {
+    background-color: #7511e7;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .tv-category {
+    background-color: #139971;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+  } 
+}
+
+.row {
+  gap: 30px;
+}

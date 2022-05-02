@@ -1,0 +1,28 @@
+.logo-container {
+  display: flex;
+  justify-content: center;
+
+  .logo {
+    font-size: 100%;
+    color: #ed1c25;
+    text-align: center;
+    font-family: 'Kanit',
+    sans-serif;
+  }
+}
+
+.margin-bottom-color {
+  background-color: #f8f9fa;
+}
+
+.corona-container {
+  background-color: #30333a;
+  // margin: 0 0 20px;
+  padding: 5px 0 4px;
+  font-size: small;
+  
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}
