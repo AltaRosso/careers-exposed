@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap'
-import Daluxolo from '../../assets/slider/cover1.svg'
+import Daluxolo from '../../assets/slider/cover1.jpg'
 import image_01 from '../../assets/slider/image_01.jpg'
 import image_02 from '../../assets/slider/image_02.jpg'
 import './carousel.styles.scss'
