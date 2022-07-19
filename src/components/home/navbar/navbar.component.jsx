@@ -16,9 +16,9 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a className="nav-link active" aria-current="page" style={{ textDecoration: 'none' }} href="/">
+            <Link className="nav-link" to={'/'}>
               <Logo />
-            </a>
+            </Link>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
               <Link className="nav-link" to={'/stories'}>Stories</Link>
