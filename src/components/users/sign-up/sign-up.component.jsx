@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../home/navbar/navbar.component";
 import Footer from "../../home/footer/footer.component";
-require('dotenv').config()
 
 const Signup = () => {
 
@@ -11,7 +10,7 @@ const Signup = () => {
   const [password, setPassword] = useState(null)
   const [confirmPassword, setConfirmPassword] = useState(null)
 
-  const clientId = process.env.CLIENT_ID
+  const clientId = process.env.REACT_APP_CLIENT_ID
 
   const handleCallbackResponse = (response) => {
     console.log('JWT:', response.credential)
@@ -28,7 +27,7 @@ const Signup = () => {
       document.getElementById('signinDiv'),
       { theme: 'outline', size: 'large' }
     )
-  }, [])
+  }, [clientId])
 
   return (
     <div>
