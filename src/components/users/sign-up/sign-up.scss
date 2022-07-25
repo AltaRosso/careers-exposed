@@ -1,0 +1,61 @@
+.sign-in-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px;
+
+  .login-container, .register-container {
+    padding: 20px;
+    box-shadow: 4px 5px 10px 3px rgba(0, 0, 0, 0.26);
+      -webkit-box-shadow: 4px 5px 10px 3px rgba(0, 0, 0, 0.26);
+      -moz-box-shadow: 4px 5px 10px 3px rgba(0, 0, 0, 0.26);
+
+    .sign-button-conatiner {
+      text-align: center;
+
+      .sign-up-button {
+          width: 160px;
+          border-radius: 28px;
+          text-align: center;
+        }
+    }
+  }
+
+  .login-container {
+
+    .signin-with-google {
+        display: inline-flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 5px;
+        border: 1px solid #6c757d;
+        padding: 5px 10px;
+        border-radius: 28px;
+
+        &:hover {
+          transform: translate(1px);
+        }
+      }
+
+    h2 {
+      padding-bottom: 10px;
+    }
+
+    form {
+      padding-top: 20px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .sign-in-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 50px;
+  }
+}
+
+
+
+
+

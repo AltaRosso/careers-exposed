@@ -1,88 +1,172 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "../../home/navbar/navbar.component";
 import Footer from "../../home/footer/footer.component";
+import Form from 'react-bootstrap/Form'
+import { FcGoogle } from 'react-icons/fc'
+
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut
+} from 'firebase/auth'
+import { auth, signInWithGoogle } from '../../../utils/firebase/firebase.utils'
+
+import './sign-up.scss'
 
 const Signup = () => {
 
-  const [name, setName] = useState(null)
-  const [registerEmail, setRegisterEmail] = useState(null)
-  const [industry, setIndustry] = useState(null)
-  const [password, setPassword] = useState(null)
-  const [confirmPassword, setConfirmPassword] = useState(null)
+  const [registerEmail, setRegisterEmail] = useState('')
+  const [registerPassword, setRegisterPassword] = useState('')
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
 
-  const clientId = process.env.REACT_APP_CLIENT_ID
+  const [user, setUser] = useState({});
 
-  const handleCallbackResponse = (response) => {
-    console.log('JWT:', response.credential)
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser)
+  })
+
+
+  // const clientId = process.env.REACT_APP_CLIENT_ID
+
+
+  const register = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      )
+      console.log(user)
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 
-  useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({
-      Client_id: clientId,
-      callback: handleCallbackResponse
-    })
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      )
+      console.log(user)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
 
-    google.accounts.id.renderButton(
-      document.getElementById('signinDiv'),
-      { theme: 'outline', size: 'large' }
-    )
-  }, [clientId])
+  const logout = async () => {
+    await signOut(auth)
+  }
 
   return (
     <div>
       <Navbar />
-      <div className="contact-container">
+      <div className="sign-in-container">
 
-        <h2>Don't have an account?</h2>
-        <div id="signinDiv"></div>
+        <>
+          {user &&
+            <button onClick={logout}>Log Out</button>
+          }
+        </>
 
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">Name</label>
-          <input type="name" className="form-control" name="name" placeholder="Enter your name"
-            onChange={(event) => {
-              setName(event.target.value)
-            }}
-          />
+        <div className="login-container">
+
+          <h2>Already have an account?</h2>
+
+          <div className="signin-with-google-container text-center">
+            <button className="signin-with-google" onClick={signInWithGoogle}><FcGoogle />Sign in with Google</button>
+          </div>
+          <Form>
+            <div className="mb-3">
+
+              <label htmlFor="email" className="form-label">E-mail</label>
+              <input
+                type="email"
+                className="form-control"
+                placeholder="E-mail"
+                onChange={(event) => {
+                  setLoginEmail(event.target.value)
+                }}
+              />
+            </div>
+            <div className="mb-3">
+
+              <label htmlFor="password" className="form-label">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Password"
+                onChange={(event) => {
+                  setLoginPassword(event.target.value)
+                }}
+              />
+            </div>
+
+            <div className="sign-button-conatiner">
+              <button className="btn btn-primary sign-up-button" type="submit" onClick={login}>Sign In</button>
+            </div>
+          </Form>
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">E-mail</label>
-          <input type="email" className="form-control" name="email" placeholder="E-mail"
-            onChange={(event) => {
-              setRegisterEmail(event.target.value)
-            }}
-          />
+        <div className="register-container">
+          <h2>Don't have an account?</h2>
+
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">Name</label>
+            <input
+              type="name"
+              className="form-control"
+              name="name"
+              placeholder="Enter your name"
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">E-mail</label>
+            <input
+              type="email"
+              className="form-control"
+              name="email"
+              placeholder="E-mail"
+              required
+              onChange={(event) => {
+                setRegisterEmail(event.target.value)
+              }}
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="industry" className="form-label">Industry</label>
+            <input
+              type="text"
+              className="form-control"
+              name="industry"
+              laceholder="Industry you're interested in"
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              placeholder="Password"
+              required
+              onChange={(event) => {
+                setRegisterPassword(event.target.value)
+              }}
+            />
+          </div>
+
+          <div className="sign-button-conatiner">
+            <button className="btn btn-primary sign-up-button" type="submit" onClick={register}>Sign Up</button>
+          </div>
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="industry" className="form-label">Industry</label>
-          <input type="text" className="form-control" name="industry" placeholder="Industry you're interested in"
-            onChange={(event) => {
-              setIndustry(event.target.value)
-            }}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
-          <input type="password" className="form-control" name="password" placeholder="Password" required
-            onChange={(event) => {
-              setPassword(event.target.value)
-            }}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="confirmPassword" className="form-label">Confirm password</label>
-          <input type="password" className="form-control" name="confirmPassword" placeholder="Confirm Password"
-            onChange={(event) => {
-              setConfirmPassword(event.target.value)
-            }}
-          />
-        </div>
-
-        <button type="submit">Sign Up</button>
       </div>
 
       <Footer />
